@@ -1,13 +1,25 @@
-const UnorderedPokemonList = ({ pokemonList, setPokemonList }) => {
+const UnorderedPokemonList = ({ pokemonList, setPokemonDetails }) => {
 
   return (
-    <ul>
-      {
-        pokemonList.map((currentPokemon, index) => {
-          return <li key={index} onClick={() => setPokemonList([currentPokemon])}>{currentPokemon.name}</li>
-        })
-      }
-    </ul>
+    <>
+      <ul>
+        {
+          pokemonList.map((currentPokemon, index) => {
+            return (
+              <>
+                <li key={index} onClick={() => setPokemonDetails(currentPokemon)}>{currentPokemon.name}</li>
+                {/* <button onClick={() => setPokemonDetails(currentPokemon)}>See details</button> */}
+              </>
+
+            )
+            
+            
+
+          })
+        }
+      </ul>
+    </>
+    
   )
 }
 

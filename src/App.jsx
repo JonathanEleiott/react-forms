@@ -5,6 +5,7 @@ import './App.css'
 const App = () => {
   const API_BASE_URL = "https://pokeapi.co/api/v2/";
   const [pokemonList, setPokemonList] = useState([]);
+  const [pokemonDetails, setPokemonDetails] = useState({});
   const [pokemonNameInput, setPokemonNameInput] = useState("");
   const [pokemonUrlInput, setPokemonUrlInput] = useState("");
 
@@ -45,14 +46,22 @@ const App = () => {
     <>
       <h1>Pokemon Form</h1>
 
-      <form onSubmit={onPokemonFormSubmit}>
-        <input placeholder="pokemon name" name="newPokemonName" onChange={(event) => setPokemonNameInput(event.target.value)}/>
-        <input placeholder="pokemon url" name="newPokemonUrl" onChange={(event) => setPokemonUrlInput(event.target.value)}/>
-        <button>Submit New Pokemon</button>
-      </form>
-
       {
-        pokemonList.length ? <UnorderedPokemonList pokemonList={pokemonList} setPokemonList={setPokemonList}/> : <p>Loading...</p>
+        pokemonDetails.name ? 
+          <>
+            <p>{pokemonDetails.name}</p>
+
+            <button onClick={() => setPokemonDetails({})}>Back</button>
+          </> : 
+          <>
+            <form onSubmit={onPokemonFormSubmit}>
+              <input placeholder="pokemon name" name="newPokemonName" onChange={(event) => setPokemonNameInput(event.target.value)}/>
+              <input placeholder="pokemon url" name="newPokemonUrl" onChange={(event) => setPokemonUrlInput(event.target.value)}/>
+              <button>Submit New Pokemon</button>
+            </form>
+            
+            { pokemonList.length ? <UnorderedPokemonList pokemonList={pokemonList} setPokemonDetails={setPokemonDetails}/> : <p>Loading...</p> }  
+          </>
       }
     </>
   )
